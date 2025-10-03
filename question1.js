@@ -2,7 +2,7 @@ async function fetchdata() {
   try {
     // make api request
     const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts?_embed=comments&_expand=user/${userId}/${title}/${Comments}/${postId}/${name}/${email}/${body}`
+      `https://jsonplaceholder.typicode.com/posts?_embed=comments&_expand=user`
     ) // get data
     // check if the request is successfull
     if (!response.ok) throw new Error(`HTTP error status: ${response.status}`)
@@ -10,13 +10,14 @@ async function fetchdata() {
     const authors = await response.json()
     let fetchdata = []
 
-    for (let i = 0; i, i < authors.length; i++) {
+    for (let i = 0; i < authors.length; i++) {
       fetchdata.push({
+        id: authors[i].id,
         name: authors[i].name,
         title: authors[i].title,
-        email: authors[i].email,
         body: authors[i].body,
         comments: authors[i].comments,
+        body: authors[i].body,
       })
     }
   } catch (error) {
@@ -26,6 +27,7 @@ async function fetchdata() {
 }
 async function display() {
   let data = await fetchdata()
+
   console.log(data)
 }
 fetchdata()
