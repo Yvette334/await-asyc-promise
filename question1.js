@@ -8,11 +8,11 @@ async function fetchdata() {
     if (!response.ok) throw new Error(`HTTP error status: ${response.status}`)
     // make them readable
     const authors = await response.json()
-    let fetchdata = []
+    let fetchdata = {}
 
     for (let i = 0; i < authors.length; i++) {
       fetchdata.push({
-        id: authors[i].id,
+        id: authors[i].user.id,
         name: authors[i].name,
         title: authors[i].title,
         body: authors[i].body,
@@ -26,8 +26,8 @@ async function fetchdata() {
   }
 }
 async function display() {
-  let data = await fetchdata()
+  let data = await fetchdata(1)
 
   console.log(data)
 }
-fetchdata()
+display()
